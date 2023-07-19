@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Navigation from '../../components/Navigation';
 
 const Prob1 = () => {
     const [cash, setCash] = useState('');
@@ -8,16 +9,14 @@ const Prob1 = () => {
     const calculateChange = () => {
         const cashAmount = parseFloat(cash);
         const priceAmount = parseFloat(productPrice);
-
-        const difference = cashAmount - priceAmount;
-        let remainingChange = difference;
+        let remainingChange = cashAmount - priceAmount;
 
         const denominations = [
-            { value: 1000, label: 'ใบ 1,000 บาท' },
-            { value: 500, label: 'ใบ 500 บาท' },
-            { value: 100, label: 'ใบ 100 บาท' },
-            { value: 50, label: 'ใบ 50 บาท' },
-            { value: 20, label: 'ใบ 20 บาท' },
+            { value: 1000, label: 'ธนบัตร 1,000 บาท' },
+            { value: 500, label: 'ธนบัตร 500 บาท' },
+            { value: 100, label: 'ธนบัตร 100 บาท' },
+            { value: 50, label: 'ธนบัตร 50 บาท' },
+            { value: 20, label: 'ธนบัตร 20 บาท' },
             { value: 10, label: 'เหรียญ 10 บาท' },
             { value: 5, label: 'เหรียญ 5 บาท' },
             { value: 2, label: 'เหรียญ 2 บาท' },
@@ -56,30 +55,37 @@ const Prob1 = () => {
     };
 
     return (
-        <div>
+        <div className='calculate-form'>
+            <Navigation />
             <form onSubmit={handleSubmit}>
                 <h3>โจทย์ข้อที่ 1</h3>
                 <label>
-                    จำนวนเงินที่รับ:
+                    เงินสด
                     <input type="text" value={cash} onChange={handleCashChange} />
-                    บาท
                 </label>
                 <br />
                 <label>
-                    ราคาสินค้า:
+                    ราคาสินค้า
                     <input type="text" value={productPrice} onChange={handleProductPriceChange} />
-                    บาท
                 </label>
                 <br />
-                <button type="submit">คำนวณเงินทอน</button>
+                <button type="submit">submit</button>
             </form>
-            <ul>
-                {change.map((denomination) => (
-                    <li key={denomination.value}>
-                        {denomination.label} x {denomination.count}
-                    </li>
-                ))}
-            </ul>
+            {change.length > 0 && (
+                <div>
+                    <p>เงินสด = {cash} บาท</p>
+                    <p>ราคาสินค้า = {productPrice} บาท</p>
+                    <p>เงินทอน = {cash - productPrice} บาท</p>
+                    <p>**------------------------------------**</p>
+                    <ul>
+                        {change.map((denomination) => (
+                            <div key={denomination.value}>
+                                มีจำนวน{denomination.label} = {denomination.count} {denomination.label.includes('ธนบัตร') ? 'ใบ' : 'เหรียญ'}
+                            </div>
+                        ))}
+                    </ul>
+                </div>
+            )}
         </div>
     );
 };
