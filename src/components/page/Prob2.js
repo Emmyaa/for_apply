@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import Navigation from '../../components/Navigation';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
+
 const Prob2 = () => {
     const [inputA, setInputA] = useState('');
     const [inputB, setInputB] = useState('');
@@ -15,10 +19,6 @@ const Prob2 = () => {
 
     const reversInputB = inputB.split('').reverse().join('');
 
-    const submit = () => {
-        const merged = mergeStrings(inputA, reversInputB);
-        setResult(merged);
-    };
 
     const mergeStrings = (str1, str2) => {
         const merged = [];
@@ -33,37 +33,43 @@ const Prob2 = () => {
         return merged.join(',');
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const merged = mergeStrings(inputA, reversInputB);
+        setResult(merged);
+    };
+
 
     return (
         <div>
             <Navigation />
-            <h3>โจทย์ข้อที่ 2</h3>
-            <div className="form-control">
-                <label>INPUT A :</label>
-                <input type="text" value={inputA} onChange={inputChange} />
-            </div>
-            <div className="form-control">
-                <label>INPUT B :</label>
-                <input type="text" value={inputB} onChange={inputBChange} />
-            </div>
-            <button type="submit" onClick={submit}>
-                Submit
-            </button>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group className="mt-5 ms-5 me-5" controlId="formBasicEmail">
+                    <h3>โจทย์ข้อที่ 2</h3>
+                </Form.Group>
+                <Form.Group className="mt-3 ms-5 me-5" controlId="formBasicEmail">
+                    <Form.Label>INPUT A :</Form.Label>
+                    <Form.Control type="text" value={inputA} onChange={inputChange} />
+                </Form.Group>
+                <Form.Group className="mt-3 ms-5 me-5" controlId="formBasicPassword">
+                    <Form.Label>INPUT B :</Form.Label>
+                    <Form.Control type="text" value={inputB} onChange={inputBChange} />
+                </Form.Group>
+                <Button className="mt-3 ms-5" variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
             {result.length > 0 && (
                 <div>
-                    <p>INPUT A : {inputA}</p>
-                    <p>INPUT B : {inputB}</p>
-                    <p>**---------------------------------------**</p>
-                    <p>Result: {result}</p>
+                    <Card body className="mt-5 ms-5 me-5">
+                        <p>INPUT A : {inputA}</p>
+                        <p>INPUT B : {inputB}</p>
+                        <p>Result: {result}</p>
+                    </Card>
                 </div>
             )}
-
-        </div>
+        </div >
     );
 };
 
 export default Prob2;
-
-// useEffect(() => {
-//     reverseInputB(inputA, inputB)
-// }, [inputA, inputB])

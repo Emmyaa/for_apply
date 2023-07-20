@@ -1,31 +1,22 @@
-import { Link } from "react-router-dom";
-import './Navigation.css';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import { Navbar } from 'react-bootstrap';
+import { FaDog } from "react-icons/fa";
 
 const Navigation = () => {
     return (
-        <aside>
-            <div className="nav">
-                <Link to="/" className="link1">
-                    <div className="probname">
-                        โจทย์ข้อที่ 1
-                    </div>
-                </Link>
-            </div>
-            <div className="nav">
-                <Link to="/p1" className="link2">
-                    <div className="probname">
-                        โจทย์ข้อที่ 2
-                    </div>
-                </Link>
-            </div>
-            <div className="nav">
-                <Link to="/p2" className="link3">
-                    <div className="probname">
-                        โจทย์ข้อที่ 3
-                    </div>
-                </Link>
-            </div>
-        </aside>
+        <>
+            <Navbar bg="primary" data-bs-theme="dark">
+                <Container>
+                    <Navbar.Brand ><h3><FaDog /></h3></Navbar.Brand>
+                    <Nav className="me-auto">
+                        <Nav.Link href="/">โจทย์ข้อที่ 1</Nav.Link>
+                        <Nav.Link href="/p2">โจทย์ข้อที่ 2</Nav.Link>
+                        <Nav.Link href="/p3">โจทย์ข้อที่ 3</Nav.Link>
+                    </Nav>
+                </Container>
+            </Navbar>
+        </>
     );
 };
 

@@ -9,16 +9,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Prob1 />} />
-        <Route path="/p1" element={<Prob2 />} />
-        <Route path="/p2" element={<Prob3 />} />
+        <Route path="/p2" element={<Prob2 />} />
+        <Route path="/p3" element={<Prob3 />} />
       </Routes>
     </BrowserRouter>
   );
 }
 
 export default App;
-// {/* <Router>
-//           <Navigation />
-//           <Route path="/p1" component={Prob1} exact />
-//           <Route path="/p2" component={Prob2} />
-//         </Router> */}

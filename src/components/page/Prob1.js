@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import Navigation from '../../components/Navigation';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
 
 const Prob1 = () => {
     const [cash, setCash] = useState('');
@@ -55,36 +58,39 @@ const Prob1 = () => {
     };
 
     return (
-        <div className='calculate-form'>
+        <div>
             <Navigation />
-            <form onSubmit={handleSubmit}>
-                <h3>โจทย์ข้อที่ 1</h3>
-                <label>
-                    เงินสด
-                    <input type="text" value={cash} onChange={handleCashChange} />
-                </label>
-                <br />
-                <label>
-                    ราคาสินค้า
-                    <input type="text" value={productPrice} onChange={handleProductPriceChange} />
-                </label>
-                <br />
-                <button type="submit">submit</button>
-            </form>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group className="mt-5 ms-5 me-5" controlId="formBasicEmail">
+                    <h3>โจทย์ข้อที่ 1</h3>
+                </Form.Group>
+                <Form.Group className="mt-3 ms-5 me-5" controlId="formBasicEmail">
+                    <Form.Label>เงินสด</Form.Label>
+                    <Form.Control type="text" placeholder="กรอกจำนวนเงินที่มี" value={cash} onChange={handleCashChange} />
+                </Form.Group>
+                <Form.Group className="mt-3 ms-5 me-5" controlId="formBasicPassword">
+                    <Form.Label>ราคาสินค้า</Form.Label>
+                    <Form.Control type="text" placeholder="กรอกราคาสินค้า" value={productPrice} onChange={handleProductPriceChange} />
+                </Form.Group>
+                <Button className="mt-3 ms-5" variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
             {change.length > 0 && (
-                <div>
-                    <p>เงินสด = {cash} บาท</p>
-                    <p>ราคาสินค้า = {productPrice} บาท</p>
-                    <p>เงินทอน = {cash - productPrice} บาท</p>
-                    <p>**------------------------------------**</p>
-                    <ul>
-                        {change.map((denomination) => (
-                            <div key={denomination.value}>
-                                มีจำนวน{denomination.label} = {denomination.count} {denomination.label.includes('ธนบัตร') ? 'ใบ' : 'เหรียญ'}
-                            </div>
-                        ))}
-                    </ul>
-                </div>
+                <Card body className="mt-5 ms-5 me-5">
+                    <div className='result-style'>
+                        <p>เงินสด = {cash} บาท</p>
+                        <p>ราคาสินค้า = {productPrice} บาท</p>
+                        <p>เงินทอน = {cash - productPrice} บาท</p>
+                        <ul>
+                            {change.map((denomination) => (
+                                <div key={denomination.value}>
+                                    มีจำนวน{denomination.label} = {denomination.count} {denomination.label.includes('ธนบัตร') ? 'ใบ' : 'เหรียญ'}
+                                </div>
+                            ))}
+                        </ul>
+                    </div>
+                </Card>
             )}
         </div>
     );
